@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insomnya – Bookmarklet Setup</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #cbd5e1;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── Header ─────────────────────────────────────── */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        header .cup { font-size: 48px; margin-bottom: 12px; }
+        header h1 {
+            color: #e2e8f0;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        header p { color: #94a3b8; font-size: 15px; }
+
+        /* ── Sections ───────────────────────────────────── */
+        section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        section h2 {
+            color: #e2e8f0;
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        section h2 .step-num {
+            background: #14b8a6;
+            color: #fff;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        section p { margin-bottom: 12px; font-size: 14px; }
+
+        /* ── Bookmarklet link ───────────────────────────── */
+        .bookmarklet-container {
+            text-align: center;
+            padding: 24px;
+        }
+        .bookmarklet-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font: 700 16px/1 system-ui, sans-serif;
+            box-shadow: 0 4px 16px rgba(20, 184, 166, .35);
+            cursor: grab;
+            transition: transform .15s, box-shadow .15s;
+            user-select: none;
+        }
+        .bookmarklet-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(20, 184, 166, .45);
+        }
+        .bookmarklet-link:active { cursor: grabbing; transform: translateY(0); }
+
+        .drag-hint {
+            margin-top: 14px;
+            color: #94a3b8;
+            font-size: 13px;
+            animation: pulse-text 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-text { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+
+
+        /* ── Steps list ─────────────────────────────────── */
+        ol.steps {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        ol.steps li {
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+        ol.steps li strong { color: #e2e8f0; }
+
+        code {
+            background: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Cascadia Code', Consolas, monospace;
+            font-size: 12.5px;
+            color: #a5f3fc;
+        }
+
+        /* ── Badge preview ──────────────────────────────── */
+        .badge-preview {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #14b8a6;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font: 600 13px/1.4 system-ui;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3);
+        }
+
+        /* ── Features list ──────────────────────────────── */
+        ul.features {
+            list-style: none;
+            padding: 0;
+        }
+        ul.features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #334155;
+            font-size: 14px;
+            display: flex;
+            gap: 10px;
+        }
+        ul.features li:last-child { border-bottom: none; }
+        ul.features li .check { color: #22c55e; flex-shrink: 0; }
+
+        /* ── Footer ─────────────────────────────────────── */
+        footer {
+            text-align: center;
+            color: #475569;
+            font-size: 12px;
+            margin-top: 32px;
+        }
+        footer a { color: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ── Header ──────────────────────────────────── -->
+        <header>
+            <div class="cup">☕</div>
+            <h1>Insomnya </h1>
+            <p>Keep your screen awake on any page — with a single click.</p>
+        </header>
+
+        <!-- ── Quick Setup ────────────────────────────── -->
+        <section>
+            <h2><span class="step-num">1</span> Quick Setup</h2>
+            <p>
+                Drag the button below to your <strong>bookmarks bar</strong>.
+                If your bookmarks bar is hidden, press <code>Ctrl + Shift + B</code> to show it first.
+            </p>
+            <div class="bookmarklet-container">
+                <a class="bookmarklet-link"
+                   href="javascript:void(function(){if(window._icmWake){if(window._icmWake.wl)window._icmWake.wl.release();var e=document.getElementById('_icmWakeBadge');if(e)e.remove();document.removeEventListener('visibilitychange',window._icmWake.vc);window._icmWake=null;return}var d=document,b=d.createElement('div');b.id='_icmWakeBadge';b.style.cssText='position:fixed;bottom:12px;right:12px;z-index:2147483647;background:%2314b8a6;color:%23fff;padding:6px 14px;border-radius:20px;font:600 13px/1.4 system-ui,-apple-system,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);user-select:none;transition:background .2s';b.textContent='\u2615 Awake';d.body.appendChild(b);window._icmWake={wl:null,on:true,vc:null};async function acq(){try{window._icmWake.wl=await navigator.wakeLock.request('screen');window._icmWake.wl.onrelease=function(){if(window._icmWake)window._icmWake.wl=null};b.textContent='\u2615 Awake';b.style.background='%2314b8a6'}catch(e){b.textContent='\u2615 Failed';b.style.background='%23ef4444'}}acq();window._icmWake.vc=function(){if(d.visibilityState==='visible'%26%26window._icmWake%26%26window._icmWake.on)acq()};d.addEventListener('visibilitychange',window._icmWake.vc);b.onclick=function(){if(!window._icmWake)return;if(window._icmWake.on){window._icmWake.on=false;if(window._icmWake.wl)window._icmWake.wl.release();b.textContent='\u2615 Paused';b.style.background='%236b7280'}else{window._icmWake.on=true;acq()}}}())"
+                >☕</a>
+                <div class="drag-hint">↑ Drag this button to your bookmarks bar ↑</div>
+            </div>
+        </section>
+
+        <!-- ── Step 2: Usage ───────────────────────────── -->
+        <section>
+            <h2><span class="step-num">2</span> Use It</h2>
+            <ol class="steps">
+                <li>
+                    Navigate to <strong>any page</strong> you want to keep your screen awake on 
+                    (dashboards, monitoring portals, documentation, etc.).
+                </li>
+                <li>
+                    Click the <strong>☕ Insomnya</strong> bookmark in your bookmarks bar.
+                </li>
+                <li>
+                    A small badge appears in the bottom-right corner: 
+                    <span class="badge-preview">☕ Awake</span>
+                </li>
+                <li>
+                    Your screen will now <strong>stay on</strong> indefinitely. 
+                    All page links, buttons, and interactions work normally.
+                </li>
+                <li>
+                    <strong>Click the badge</strong> to toggle between Awake / Paused.
+                </li>
+                <li>
+                    <strong>Click the bookmarklet again</strong> to remove the badge completely.
+                </li>
+            </ol>
+        </section>
+
+        <!-- ── Features ────────────────────────────────── -->
+        <section>
+            <h2>How It Works</h2>
+            <ul class="features">
+                <li><span class="check">✓</span> Uses the <strong>Screen Wake Lock API</strong> — the official browser API for preventing sleep</li>
+                <li><span class="check">✓</span> Works on any <code>https://</code> page — dashboards, portals, monitoring tools, and more</li>
+                <li><span class="check">✓</span> Auto-reacquires wake lock when you switch back to the tab</li>
+                <li><span class="check">✓</span> Zero installation — it's just a bookmark</li>
+                <li><span class="check">✓</span> Does not tamper with page functionality — all links and actions work</li>
+                <li><span class="check">✓</span> Click the badge to pause/resume, click bookmarklet again to remove</li>
+            </ul>
+        </section>
+
+
+
+        <!-- ── Notes ───────────────────────────────────── -->
+        <section>
+            <h2>Notes</h2>
+            <p>
+                <strong>Page navigation:</strong> The wake lock stays active as you navigate 
+                within a site. If you navigate to a completely different site, click the 
+                bookmarklet again on the new page.
+            </p>
+            <p>
+                <strong>Browser support:</strong> Screen Wake Lock API is supported in 
+                Edge 84+, Chrome 84+, and Opera 70+. Not supported in Firefox.
+            </p>
+            <p>
+                <strong>Secure pages only:</strong> The Wake Lock API requires an <code>https://</code> 
+                page. It won't work on <code>http://</code> or local <code>file://</code> pages.
+            </p>
+        </section>
+
+        <footer>
+            Insomnya · Built with NoSleep.js concepts · No installation required
+        </footer>
+    </div>
+
+
+</body>
+</html>
