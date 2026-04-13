@@ -1,22 +1,22 @@
 # Insomnya
 
-Insomnya is a bookmarklet that keeps your screen awake while you are using any supported HTTPS web page.
+Insomnya is a lightweight bookmarklet that helps keep your screen awake on supported HTTPS pages.
 
-It uses the browser Screen Wake Lock API, so there is no installation and no background app needed.
+It uses the browser Screen Wake Lock API, so there is no installation, no extension, and no background service.
 
-## What It Does
+## Features
 
-- Prevents screen sleep on supported browsers/pages.
+- Prevents screen sleep on supported pages.
 - Shows a small on-page badge with status.
-- Lets you pause/resume by clicking the badge.
+- Lets you pause and resume by clicking the badge.
 - Removes itself cleanly when the bookmarklet is triggered again.
-- Reacquires wake lock when you return to the tab.
+- Reacquires wake lock when the tab becomes visible again.
 
 ## Quick Setup
 
 1. Open `bookmarklet.html` in your browser.
 2. Make sure your bookmarks bar is visible.
-3. Drag the coffee button to the bookmarks bar.
+3. Drag the coffee button onto the bookmarks bar.
 4. Open any supported HTTPS page.
 5. Click the saved Insomnya bookmark.
 
@@ -25,7 +25,7 @@ It uses the browser Screen Wake Lock API, so there is no installation and no bac
 1. Click the bookmarklet on a page where you want to keep the display awake.
 2. Confirm the bottom-right badge shows `Awake`.
 3. Click the badge to toggle `Paused` and `Awake`.
-4. Click the bookmarklet again to remove the badge and cleanup listeners.
+4. Click the bookmarklet again to remove the badge and clean up listeners.
 
 ## Compatibility
 
@@ -37,6 +37,11 @@ It uses the browser Screen Wake Lock API, so there is no installation and no bac
 
 - Wake lock is browser/device dependent and can be released by system policy (battery saver, OS rules, etc.).
 - If you move to a completely different site, trigger the bookmarklet again on that page.
+
+## Release
+
+- Current version: `v1.0.0`
+- Scope: initial public-ready bookmarklet with setup page, usage docs, MIT license, and security policy.
 
 ## Privacy and Security
 
