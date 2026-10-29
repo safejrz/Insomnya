@@ -4,6 +4,12 @@ Insomnya is a lightweight bookmarklet that helps keep your screen awake on suppo
 
 It uses the browser Screen Wake Lock API, so there is no installation, no extension, and no background service.
 
+## Live Setup Page
+
+The setup page is published with GitHub Pages and can be used directly, with nothing to download:
+
+**https://safejrz.github.io/Insomnya/**
+
 ## Features
 
 - Prevents screen sleep on supported pages.
@@ -14,7 +20,7 @@ It uses the browser Screen Wake Lock API, so there is no installation, no extens
 
 ## Quick Setup
 
-1. Open `bookmarklet.html` in your browser.
+1. Open the [setup page](https://safejrz.github.io/Insomnya/) in your browser (or open `index.html` locally).
 2. Make sure your bookmarks bar is visible.
 3. Drag the coffee button onto the bookmarks bar.
 4. Open any supported HTTPS page.
